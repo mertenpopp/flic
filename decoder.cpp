@@ -123,13 +123,10 @@ void Decoder::readBlackChunk(Frame& frame)
 
 void Decoder::readCopyChunk(Frame& frame)
 {
-  assert(m_width == 320 && m_height == 200);
-  if (m_width == 320 && m_height == 200) {
-    for (int y=0; y<200; ++y) {
-      uint8_t* it = frame.pixels + y*frame.rowstride;
-      for (int x=0; x<320; ++x, ++it)
-        *it = m_file->read8();
-    }
+  for (int y=0; y<m_height; ++y) {
+    uint8_t* it = frame.pixels + y*frame.rowstride;
+    for (int x=0; x<m_width; ++x, ++it)
+      *it = m_file->read8();
   }
 }
 
